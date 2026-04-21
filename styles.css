@@ -1,14 +1,36 @@
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f4f4f4;
+/* Variables de color y fuentes */
+:root {
+    --primary-color: #ebb625;
+    --secondary-color: #1e293b;
+    --accent-color: #10b981;
+    --text-light: #f8fafc;
+    --text-dark: #334155;
+    --bg-light: #ffffff;
 }
 
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: #f4f7f6;
+}
+
+/* Header / navegación */
 header {
-    background-color: #333;
+    background: var(--secondary-color);
     color: white;
-    padding: 15px;
+    padding: 1rem 5%;
     text-align: center;
 }
 
@@ -16,21 +38,98 @@ header h1 {
     margin: 0;
 }
 
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 nav {
     margin-top: 10px;
 }
 
-nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
 }
 
+.nav-links li a,
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 1rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover,
 nav a:hover {
+    color: var(--primary-color);
     text-decoration: underline;
 }
 
+.btn-contacto {
+    background: var(--primary-color);
+    color: white !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.8)),
+        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-light);
+    padding-top: 80px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content h1 span {
+    color: var(--primary-color);
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+}
+
+/* Servicios */
+.services {
+    padding: 4rem 10%;
+    text-align: center;
+}
+
+.services-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 300px;
+}
+
+/* Formulario contacto (del HEAD) */
 .contacto {
     max-width: 500px;
     margin: 40px auto;
@@ -69,17 +168,45 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
+/* CTA */
+.cta {
+    background: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 4rem 5%;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+/* Footer */
 footer {
     text-align: center;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #333;
-    color: white;
+    padding: 1.5rem;
+    background: #0f172a;
+    color: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
 }
