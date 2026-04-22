@@ -3,81 +3,687 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios - Mi Empresa</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Servicios - Mi Empresa | Soluciones Tecnológicas Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: #2d3748;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--primary-gradient);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover::before {
+            left: 0;
+        }
+
+        .nav-link:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #667eea20 0%, #764ba230 100%);
+            margin-top: 80px;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            color: #64748b;
+            margin-bottom: 3rem;
+            max-width: 800px;
+        }
+
+        .service-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 900px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 8rem 0;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.8rem, 5vw, 4.5rem);
+            font-weight: 800;
+            background: var(--dark-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 6px;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3.5rem 3rem;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            font-size: 2.8rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Service Card Gradients */
+        .service-card:nth-child(1) .service-icon { background: var(--primary-gradient); }
+        .service-card:nth-child(2) .service-icon { background: var(--secondary-gradient); }
+        .service-card:nth-child(3) .service-icon { background: var(--success-gradient); }
+        .service-card:nth-child(4) .service-icon { background: var(--warning-gradient); }
+        .service-card:nth-child(5) .service-icon { background: var(--dark-gradient); }
+        .service-card:nth-child(6) .service-icon { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #2d3748;
+        }
+
+        .service-card p {
+            color: #64748b;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .service-card:hover {
+            transform: translateY(-25px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(360deg);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary-gradient);
+            padding: 6rem 0;
+            text-align: center;
+            color: white;
+            margin: 6rem 0;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1.25rem 3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-primary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.9);
+            color: #2d3748;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gradient);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                gap: 1.5rem;
+            }
+
+            .container {
+                padding: 0 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero {
+             min-height: 100vh;
+             /* ... resto del CSS ... */
+             will-change: transform;  /* Optimización GPU */
+             isolation: isolate;      /* ← NUEVO: Evita interferencia */
+}
+
+             .services-section {
+             position: relative;
+             z-index: 2;  /* ← NUEVO: Asegura visibilidad */
+             background: rgba(255,255,255,0.95);  /* ← MEJORADO: Más opaco */
+             backdrop-filter: blur(20px);
+}
+        }
+
+        /* Intersection Observer Animation */
+        .service-card.animate {
+            animation-delay: calc(var(--order) * 0.1s);
+        }
+    </style>
 </head>
 <body>
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
 
-<header>
-    <h1>🐱 Mi Empresa</h1>
-    <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="nosotros.html">Nosotros</a></li>
-            <li><a href="servicios.html">Servicios</a></li>
-        </ul>
-    </nav>
-</header>
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                Mi Empresa
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                <li><a href="servicios.html" class="nav-link active">Servicios</a></li>
+            </ul>
+        </div>
+    </header>
 
-<section>
-    <h2>Nuestros Servicios</h2>
-    <p>
-        Ofrecemos soluciones tecnológicas adaptadas a las necesidades de empresas, 
-        negocios pequeños y usuarios que buscan optimizar sus procesos.
-    </p>
-</section>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="animate">Nuestros Servicios</h1>
+            <p class="animate" style="animation-delay: 0.2s;">
+                Soluciones tecnológicas de vanguardia diseñadas para transformar tu negocio. 
+                Desde desarrollo personalizado hasta sistemas de monitoreo inteligente.
+            </p>
+            <div class="service-stats">
+                <div class="stat-item animate" style="animation-delay: 0.4s;">
+                    <span class="stat-number">6</span>
+                    Servicios Premium
+                </div>
+                <div class="stat-item animate" style="animation-delay: 0.5s;">
+                    <span class="stat-number">100%</span>
+                    Satisfacción
+                </div>
+                <div class="stat-item animate" style="animation-delay: 0.6s;">
+                    <span class="stat-number">24/7</span>
+                    Soporte
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section>
-    <h3>💻 Desarrollo de Software</h3>
-    <p>
-        Creamos aplicaciones web y sistemas personalizados para la gestión de datos, 
-        automatización de procesos y control de información.
-    </p>
-</section>
+    <!-- Services -->
+    <section class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="animate">Soluciones Completas</h2>
+                <p class="animate" style="animation-delay: 0.2s; font-size: 1.3rem; color: #64748b;">
+                    Cada servicio está diseñado con tecnología de punta para maximizar tu eficiencia
+                </p>
+            </div>
 
-<section>
-    <h3>🛠️ Mantenimiento de Software</h3>
-    <p>
-        Brindamos soporte, corrección de errores, actualizaciones y mejoras continuas 
-        para garantizar el correcto funcionamiento de los sistemas.
-    </p>
-</section>
+            <div class="services-grid">
+                <div class="service-card animate" style="--order: 1;">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Desarrollo de Software</h3>
+                    <p>Aplicaciones web y sistemas personalizados para gestión de datos, automatización y control empresarial de última generación.</p>
+                </div>
 
-<section>
-    <h3>🏢 Soluciones para Microempresas</h3>
-    <p>
-        Desarrollamos proyectos tecnológicos accesibles para pequeños negocios, 
-        ayudando a digitalizar procesos como ventas, inventario y control administrativo.
-    </p>
-</section>
+                <div class="service-card animate" style="--order: 2;">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Mantenimiento Técnico</h3>
+                    <p>Soporte 24/7, corrección de errores, actualizaciones y optimizaciones continuas para máximo rendimiento.</p>
+                </div>
 
-<section>
-    <h3>📡 Monitoreo de Sensores</h3>
-    <p>
-        Implementamos sistemas de monitoreo en tiempo real para variables ambientales 
-        como gases, temperatura y calidad del aire.
-    </p>
-</section>
+                <div class="service-card animate" style="--order: 3;">
+                    <div class="service-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Microempresas</h3>
+                    <p>Soluciones accesibles y escalables para digitalizar ventas, inventarios y administración de pequeños negocios.</p>
+                </div>
 
-<section>
-    <h3>⚙️ Automatización</h3>
-    <p>
-        Diseñamos soluciones que automatizan tareas repetitivas, mejorando la eficiencia 
-        y reduciendo riesgos en distintos entornos.
-    </p>
-</section>
+                <div class="service-card animate" style="--order: 4;">
+                    <div class="service-icon">
+                        <i class="fas fa-thermometer-half"></i>
+                    </div>
+                    <h3>Monitoreo Sensores</h3>
+                    <p>Sistemas IoT para monitoreo ambiental en tiempo real: gases, temperatura, humedad y calidad del aire.</p>
+                </div>
 
-<section>
-    <h3>🚨 Sistemas de Alertas</h3>
-    <p>
-        Configuramos notificaciones inteligentes para detectar situaciones críticas 
-        y alertar a los usuarios de manera oportuna.
-    </p>
-</section>
+                <div class="service-card animate" style="--order: 5;">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Automatización</h3>
+                    <p>Procesos inteligentes que eliminan tareas repetitivas, optimizan flujos y reducen riesgos operativos.</p>
+                </div>
 
-<footer>
-    <p>© 2026 Mi Empresa</p>
-</footer>
+                <                <div class="service-card animate" style="--order: 6;">
+                    <div class="service-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Sistemas de Alertas</h3>
+                    <p>Notificaciones inteligentes con IA que detectan anomalías y alertan en tiempo real para respuesta inmediata.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content animate">
+                <h2>¿Listo para Transformar tu Negocio?</h2>
+                <p>Contáctanos hoy y descubre cómo nuestras soluciones pueden impulsar tu crecimiento</p>
+                <div class="cta-buttons">
+                    <a href="contacto.html" class="btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Comenzar Proyecto
+                    </a>
+                    <a href="#servicios" class="btn-secondary">
+                        <i class="fas fa-phone"></i>
+                        Llamar Ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="font-size: 2rem; margin-bottom: 1rem;">
+                <i class="fas fa-bolt"></i>
+                Mi Empresa
+            </div>
+            <p style="opacity: 0.8; margin-bottom: 2rem;">
+                © 2026 Mi Empresa - Soluciones tecnológicas que transforman negocios
+            </p>
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;">
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s ease;"><i class="fab fa-linkedin"></i></a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s ease;"><i class="fab fa-github"></i></a>
+                <a href="#" style="color: white; font-size: 1.5rem; transition: color 0.3s ease;"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+
+   <script>
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+
+        // Scroll indicator
+        const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        scrollIndicator.style.width = scrollPercent + '%';
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Animate on scroll - OPTIMIZADO
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'  // ← AJUSTE CLAVE
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('.animate').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax SUAVIZADO (solo en hero, sin interferencia)
+    let ticking = false;
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        if (hero && scrolled < window.innerHeight) {  // ← LIMITADO AL HERO
+            const speed = scrolled * 0.3;  // ← VELOCIDAD REDUCIDA
+            hero.style.transform = `translateY(${speed}px)`;
+        }
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+</script>
 </body>
 </html>
