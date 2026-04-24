@@ -3,15 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DevStudio: Especialistas en diseño web de alto impacto, optimización y escalabilidad para tu presencia digital.">
+    <meta name="keywords" content="diseño web, desarrollo de software, presencia digital, DevStudio">
+    <meta name="author" content="DevStudio">
+    
     <title>DevStudio | Creamos tu presencia digital</title>
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link" style="position: absolute; left: -999px;">Saltar al contenido principal</a>
+
     <header>
-        <nav class="navbar">
-            <div class="logo">Dev<span>Studio</span></div>
+        <nav class="navbar" aria-label="Navegación principal">
+            <div class="logo">
+                <a href="index.html">Dev<span>Studio</span></a>
+            </div>
+            
+            <button class="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="index.html" class="active" aria-current="page">Inicio</a></li>
                 <li><a href="nosotros.html">Nosotros</a></li>
                 <li><a href="servicios.html">Servicios</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
@@ -19,16 +37,32 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Transformamos ideas en <span>experiencias digitales</span></h1>
-            <p>Diseño web de alto impacto, optimizado para resultados y escalabilidad.</p>
-            <a href="servicios.html" class="btn">Ver Proyectos</a>
-        </div>
-    </section>
+    <main id="main-content">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Transformamos ideas en <span>experiencias digitales</span></h1>
+                <p>Diseño web de alto impacto, optimizado para resultados y escalabilidad. Potenciamos tu marca en el mundo digital.</p>
+                <div class="hero-actions">
+                    <a href="servicios.html" class="btn btn-primary">Ver Proyectos</a>
+                    <a href="contacto.html" class="btn btn-secondary">Contáctanos</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/hero-illustration.svg" alt="Ilustración de desarrollo digital" loading="eager">
+            </div>
+        </section>
+    </main>
 
-    <footer>
-        <p>&copy; 2026 DevStudio - Todos los derechos reservados.</p>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 DevStudio - Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                <a href="#" aria-label="GitHub">GitHub</a>
+            </div>
+        </div>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
